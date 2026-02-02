@@ -1,0 +1,103 @@
+*{
+    margin:0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body{
+     background-color:#dedcdcbb;
+}
+main{
+    display:flex;
+    min-height: 100vh;
+    justify-content:center;
+    align-items: center;
+}
+.sec{
+    background:white;
+    padding:30px;
+    width:30%;
+    border-radius:10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+.logo{
+    text-align: center;
+    color: #1db954;
+    margin-bottom: 10px;
+}
+h1{
+    text-align:center;
+    margin-bottom:10px;
+}
+p{
+    text-align:center;
+    padding-bottom:20px;
+    color:gray;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+input[type="email"],
+input[type="password"],
+input[type="text"]{
+    width:100%;
+    padding:10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+input:focus{
+    outline: none;
+    border-color: #1db954;
+    box-shadow: 0 0 0 2px rgba(21, 162, 71, 0.2);
+}
+
+.checkbox{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    font-size: 14px;
+}
+button {
+  margin-top: 10px;
+  padding: 12px;
+  background: #1db954;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:hover {
+  background: #28a717;
+}
+.bottom-text {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.bottom-text a {
+  color: #1db954;
+  text-decoration: none;
+}
+
+.bottom-text a:hover {
+  text-decoration: underline;
+}
+label a {
+    color: #1db954;
+    text-decoration: none;
+}
+label a:hover {
+  text-decoration: underline;
+}
+.intext{
+    font-size: 13px;        /* маленький размер */
+    color: #6a6f73;          /* серый цвет */
+    margin-top: -5px;         /* отступ сверху */
+    font-weight: 400;
+}
