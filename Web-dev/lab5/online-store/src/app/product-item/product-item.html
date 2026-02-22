@@ -1,0 +1,21 @@
+<div class="card">
+
+  <img [src]="product.image" alt="{{ product.name }}">
+
+  <h3>{{ product.name }}</h3>
+
+  <p>{{ product.description }}</p>
+
+  <p class="price">{{ product.price }} ₸</p>
+
+  <p>⭐ {{ product.rating }}</p>
+
+  <p class="likes">❤️ {{ product.likes }}</p>
+
+  <div class="buttons">
+    <button class="like-btn" (click)="like()">Like</button>
+    <button class="delete-btn" (click)="remove()">Delete</button>
+    <a [href]="product.link" target="_blank">Share</a>
+  </div>
+
+</div>
