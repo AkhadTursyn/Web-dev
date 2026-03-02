@@ -1,0 +1,29 @@
+<h2>Album Photos</h2>
+
+<div *ngIf="loading">Loading...</div>
+
+<div *ngIf="!loading">
+
+  <div style="display:flex; flex-wrap:wrap; gap:15px;">
+
+    <div *ngFor="let photo of photos"
+         style="width:150px; text-align:center;">
+
+      <img [src]="photo.thumbnailUrl"
+           style="width:100%; border-radius:8px;">
+
+      <p style="font-size:12px;">
+        {{ photo.title }}
+      </p>
+
+    </div>
+
+  </div>
+
+  <br>
+
+  <button class="btn-secondary" (click)="goBack()">
+    Back
+  </button>
+
+</div>
