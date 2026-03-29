@@ -1,42 +1,21 @@
-<div class="container">
+<h2>⭐ Favorites ({{ favorites.length }})</h2>
 
-  <h1>Online Store</h1>
-
-
-  <div class="categories">
-    @for (category of categories; track category.id) {
-      <button 
-        (click)="selectCategory(category.id)"
-        [class.active]="selectedCategoryId === category.id">
-        {{ category.name }}
-      </button>
-    }
-  </div>
-
-  <hr>
-
-  @if (!selectedCategoryId) {
-    <p>Please select a category</p>
-  }
-
-  @if (selectedCategoryId) {
-
-
-    <input 
-      type="text"
-      placeholder="Search product..."
-      [(ngModel)]="searchText"
-      (input)="filterProducts()" />
-
-    <select (change)="sortProducts($event)">
-      <option value="">Sort by</option>
-      <option value="priceAsc">Price ↑</option>
-      <option value="priceDesc">Price ↓</option>
-      <option value="rating">Rating ⭐</option>
-    </select>
-
-    <app-product-list [products]="products"></app-product-list>
-
-  }
-
+<div *ngIf="favorites.length === 0">
+  No favorite products yet
 </div>
+
+<div *ngIf="favorites.length > 0">
+  <app-product-list
+    [products]="favorites"
+    (favoriteToggle)="toggleFavorite($event)">
+  </app-product-list>
+</div>
+
+<hr>
+
+<h2>Products</h2>
+
+<app-product-list
+  [products]="products"
+  (favoriteToggle)="toggleFavorite($event)">
+</app-product-list>

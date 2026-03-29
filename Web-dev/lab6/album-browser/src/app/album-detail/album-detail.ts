@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { AlbumService } from '../services/album';
 import { Album } from '../models/album.model';
 
 @Component({
   standalone: true,
   selector: 'app-album-detail',
-  imports: [CommonModule, RouterLink],
-  templateUrl: './album-detail.html',
-  styleUrls: ['./album-detail.css'] 
+  imports: [CommonModule, RouterModule],
+  templateUrl: './album-detail.html'
 })
 export class AlbumDetailComponent implements OnInit {
 
@@ -22,19 +21,24 @@ export class AlbumDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-  const id = Number(this.route.snapshot.paramMap.get('id'));
-  console.log("ID:", id);
+    const id = Number(this.route.snapshot.paramMap.get('id'));
 
-  this.albumService.getAlbum(id).subscribe({
-    next: (data) => {
-      console.log("DATA:", data);
-      this.album = data;
-      this.loading = false;
-    },
-    error: (err) => {
-      console.log("ERROR:", err);
-      this.loading = false;
+    const current = this.albumService['albumsSubject'].value;
+
+    if (current) {
+      const found = current.find(a => a.id === id);
+      if (found) {
+        this.album = found;
+        this.loading = false;
+        return;
+      }
     }
-  });
-}
+
+    this.albumService.getAlbum(id).subscribe({
+      next: (data: Album) => {
+        this.album = data;
+        this.loading = false;
+      }
+    });
+  }
 }

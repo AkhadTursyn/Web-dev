@@ -3,23 +3,14 @@ import { Product } from '../models/product.model';
 
 @Component({
   selector: 'app-product-item',
-  standalone: true,
-  templateUrl: './product-item.html',
-  styleUrls: ['./product-item.css']
+  templateUrl: './product-item.component.html'
 })
 export class ProductItemComponent {
 
   @Input() product!: Product;
+  @Output() favoriteToggle = new EventEmitter<number>();
 
-  @Output() delete = new EventEmitter<number>();
-
-  like() {
-    this.product.likes++;
-  }
-
-  remove() {
-    if (confirm('Are you sure you want to delete this product?')) {
-      this.delete.emit(this.product.id);
-    }
+  onToggleFavorite() {
+    this.favoriteToggle.emit(this.product.id);
   }
 }

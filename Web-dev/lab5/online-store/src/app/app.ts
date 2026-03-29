@@ -1,51 +1,41 @@
 import { Component } from '@angular/core';
-import { ProductService } from './product';
-import { Category } from './models/category.model';
 import { Product } from './models/product.model';
-import { ProductListComponent } from './product-list/product-list';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [ProductListComponent, FormsModule],
-  templateUrl: './app.html',
-  styleUrls: ['./app.css']
+  templateUrl: './app.component.html'
 })
-export class App {
-  searchText: string = '';
-  allProducts: Product[] = [];
-  categories: Category[] = [];
-  selectedCategoryId: number | null = null;
-  products: Product[] = [];
+export class AppComponent {
 
-  constructor(private productService: ProductService) {
-    this.categories = this.productService.getCategories();
+  products: Product[] = [
+    {
+      id: 1,
+      name: 'iPhone 13',
+      price: 359890,
+      image: 'assets/iphone.jpg',
+      rating: 5,
+      categoryId: 1,
+      isFavorite: false
+    },
+    {
+      id: 2,
+      name: 'Sony WH-1000XM4',
+      price: 124560,
+      image: 'assets/sony.jpg',
+      rating: 5,
+      categoryId: 3,
+      isFavorite: false
+    }
+  ];
+
+  favorites: Product[] = [];
+
+  toggleFavorite(productId: number): void {
+    const product = this.products.find(p => p.id === productId);
+    if (!product) return;
+
+    product.isFavorite = !product.isFavorite;
+
+    this.favorites = this.products.filter(p => p.isFavorite);
   }
-
-  selectCategory(categoryId: number) {
-  this.selectedCategoryId = categoryId;
-  this.allProducts = this.productService.getProductsByCategory(categoryId);
-  this.products = [...this.allProducts];
-}
-  filterProducts() {
-  this.products = this.allProducts.filter(p =>
-    p.name.toLowerCase().includes(this.searchText.toLowerCase())
-  );
-}
-  sortProducts(event: any) {
-  const value = event.target.value;
-
-  if (value === 'priceAsc') {
-    this.products = [...this.products].sort((a, b) => a.price - b.price);
-  }
-
-  if (value === 'priceDesc') {
-    this.products = [...this.products].sort((a, b) => b.price - a.price);
-  }
-
-  if (value === 'rating') {
-    this.products = [...this.products].sort((a, b) => b.rating - a.rating);
-  }
-}
 }

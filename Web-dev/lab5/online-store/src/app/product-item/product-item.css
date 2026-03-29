@@ -1,65 +1,39 @@
 .card {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 15px;
-  width: 250px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  background: white;
-}
-
-img {
-  width: 100%;
-  border-radius: 8px;
-}
-
-.price {
-  font-weight: bold;
-}
-
-.likes {
-  color: red;
-}
-
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-
-.like-btn {
-  background: pink;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-.delete-btn {
-  background: red;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-.card {
+  border: 1px solid #e0e0e0;
   border-radius: 12px;
-  padding: 15px;
-  width: 250px;
+  padding: 16px;
+  margin: 15px 0;
   background: white;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
 }
 
-img {
-  width: 100%;
-  border-radius: 10px;
+.card img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  display: block;
+  margin-bottom: 10px;
 }
 
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+.price {
+  color: red;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+button {
+  margin-right: 10px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
 }

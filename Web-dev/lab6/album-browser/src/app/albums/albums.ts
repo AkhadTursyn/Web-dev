@@ -1,47 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { AlbumService } from '../services/album';
+import { Observable } from 'rxjs';
 import { Album } from '../models/album.model';
+import { AlbumService } from '../services/album';
+import { RouterModule } from '@angular/router';
 
 @Component({
-  standalone: true,
   selector: 'app-albums',
-  imports: [CommonModule, RouterLink],
-  templateUrl: './albums.html',
-  styleUrl: './albums.css'
+  standalone: true,
+  imports: [CommonModule, RouterModule], // 👈 ВОТ ЭТО ВАЖНО
+  templateUrl: './albums.html'
 })
 export class AlbumsComponent implements OnInit {
 
-  albums: Album[] = [];
-  loading = true;
+  albums$: Observable<Album[] | null>;
 
-  constructor(private albumService: AlbumService) {}
+  constructor(private albumService: AlbumService) {
+    this.albums$ = this.albumService.albums$;
+  }
 
   ngOnInit(): void {
-  console.log("AlbumsComponent started");
-
-  this.albumService.getAlbums().subscribe({
-    next: (data) => {
-      console.log("DATA RECEIVED:", data);
-      this.albums = data;
-      this.loading = false;
-    },
-    error: (err) => {
-      console.error("ERROR:", err);
-      this.loading = false;
-    }
-  });
-}
-
-  deleteAlbum(id: number): void {
-    this.albumService.deleteAlbum(id).subscribe(() => {
-      this.albums = this.albums.filter(a => a.id !== id);
-    });
+    this.albumService.loadAlbums();
   }
   delete(id: number) {
-  this.albumService.deleteAlbum(id).subscribe(() => {
-    this.albums = this.albums.filter(a => a.id !== id);
-  });
+  this.albumService.deleteAlbum(id).subscribe();
 }
 }

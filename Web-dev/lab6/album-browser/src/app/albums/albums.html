@@ -1,17 +1,15 @@
 <h2>Albums</h2>
 
-<div *ngIf="loading">Loading...</div>
+<a routerLink="/albums/new" class="btn">+ New Album</a>
 
-<ul *ngIf="!loading">
-  <li *ngFor="let album of albums" style="margin-bottom:10px;">
+<ul>
+  <li *ngFor="let album of albums$ | async" class="album-item">
 
     <a [routerLink]="['/albums', album.id]">
-      {{ album.id }} - {{ album.title }}
+      #{{ album.id }} — {{ album.title }}
     </a>
 
-    <button
-      class="btn-danger"
-      (click)="delete(album.id)">
+    <button (click)="delete(album.id)">
       Delete
     </button>
 
